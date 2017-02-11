@@ -1,3 +1,30 @@
-<h1>
-  {{title}}
-</h1>
+<h1>Editor1 as template-driven form (ngModel)</h1>
+<b>Settings:</b>
+<pre>{{editor1Settings | json}}</pre>
+<textarea tinymce="editor1"
+          [settings]="editor1Settings"
+          [(ngModel)]="editor1Model">
+</textarea>
+<br>
+<hr>
+Editor1 raw content: {{editor1Model}}
+<hr>
+Editor1 SafeHtml: <div [innerHTML]="editor1SafeHtml"></div>
+
+<br>
+<hr>
+<br>
+
+<h1>Editor2 as model-driven FormControl (formControl)</h1>
+<b>Settings:</b>
+<pre>{{editor2Settings | json}}</pre>
+<textarea tinymce="editor2"
+          [settings]="editor2Settings"
+          [formControl]="editor2Control">
+</textarea>
+<br>
+<hr>
+Editor2 raw content: {{editor2Control.value}}
+<hr>
+Editor2 SafeHtml: <div [innerHTML]="editor2SafeHtml"></div>
+
