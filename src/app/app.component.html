@@ -1,8 +1,10 @@
 <h1>Editor1 as template-driven form (ngModel)</h1>
 <b>Settings:</b>
 <pre>{{editor1Settings | json}}</pre>
-<textarea tinymce="editor1"
+<textarea #editor1="tinymce"
+          tinymce="editor1"
           [settings]="editor1Settings"
+          (onInitialized)="editorInitialized($event)"
           [(ngModel)]="editor1Model">
 </textarea>
 <br>

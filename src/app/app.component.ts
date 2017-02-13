@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
 
@@ -8,6 +8,8 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  @ViewChild('editor1') private _editor1: any;
 
   editor1Settings = {toolbar: 'undo redo | styleselect | bold italic strikethrough | link image'};
   editor1Model = '<p><b>Hello</b> <i>World!</i></p>';
@@ -22,5 +24,9 @@ export class AppComponent {
   }
 
   constructor(private _domSanitizer: DomSanitizer) { }
+
+  editorInitialized() {
+    this._editor1.editor.on('KeyPress', () => {});
+  }
 
 }

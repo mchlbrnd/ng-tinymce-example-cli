@@ -1,10 +1,11 @@
-import { Directive, ElementRef, forwardRef, ChangeDetectorRef } from '@angular/core';
+import { Directive, ElementRef, forwardRef, ChangeDetectorRef, EventEmitter, Output } from '@angular/core';
 import { Input } from '@angular/core/src/metadata/directives';
 import { TinymceEditorSettingsService } from './tinymce-editor-settings.service';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 @Directive({
   selector: 'p[tinymce], div[tinymce], textarea[tinymce]',
+  exportAs: 'tinymce',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -21,6 +22,12 @@ export class TinymceEditorDirective implements ControlValueAccessor {
 
   @Input('tinymce') private _tinymceEditorId: string;
   @Input('settings') private _tinymceEditorSettings: {} = {};
+
+  @Output('onInitialized') private _onInitialized = new EventEmitter<any>();
+
+  get editor(): any {
+    return this._tinymceEditor;
+  }
 
   constructor(
     private _elementRef: ElementRef,
@@ -39,6 +46,7 @@ export class TinymceEditorDirective implements ControlValueAccessor {
     this._tinymceEditor.on('PastePostProcess', this._tinymceOnChange);
     this._tinymceEditor.on('Change', this._tinymceOnChange);
     this.writeValue(this._value);
+    this._onInitialized.emit(this._tinymceEditor);
   };
 
   ngOnInit(): void {
