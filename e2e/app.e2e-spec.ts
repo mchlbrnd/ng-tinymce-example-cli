@@ -1,6 +1,6 @@
 import { NgTinymcePage } from './app.po';
 
-describe('ng-tinymce App', function() {
+describe('ng-tinymce-example-cli App', function() {
   let page: NgTinymcePage;
 
   beforeEach(() => {
